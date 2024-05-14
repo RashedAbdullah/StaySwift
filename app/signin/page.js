@@ -1,8 +1,8 @@
 import Image from "next/image";
 import fb from "@/public/fb.png";
 import google from "@/public/google.png";
-import SignInForm from "@/components/signin-form";
-import FbAndGoogle from "@/components/google-facebook";
+import SignInForm from "@/components/auth/signin-form";
+import FbAndGoogle from "@/components/auth/google-facebook";
 const SignInPage = () => {
   return (
     <main className="">

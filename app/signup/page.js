@@ -1,6 +1,5 @@
-
-import SignupForm from "@/components/signup-form";
-import FbAndGoogle from "@/components/google-facebook";
+import SignupForm from "@/components/auth/signup-form";
+import FbAndGoogle from "@/components/auth/google-facebook";
 
 const SignupPage = () => {
   return (

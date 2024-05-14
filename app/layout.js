@@ -14,7 +14,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         <Nabvar />
-        {children}
+        <main>{children}</main>
       </body>
     </html>
   );
