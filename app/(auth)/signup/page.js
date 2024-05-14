@@ -1,5 +1,6 @@
 import SignupForm from "@/components/auth/signup-form";
 import FbAndGoogle from "@/components/auth/google-facebook";
+import Link from "next/link";
 
 const SignupPage = () => {
   return (
@@ -10,6 +11,9 @@ const SignupPage = () => {
           <SignupForm />
 
           <div className="text-center text-xs text-gray-500">
+            <Link href="/signin" className="underline underline-offset-2">
+              Sign in
+            </Link>{" "}
             or Signup with
           </div>
           <FbAndGoogle />

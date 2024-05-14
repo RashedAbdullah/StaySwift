@@ -1,8 +1,10 @@
 import Image from "next/image";
 import logoImage from "@/public/stayswift.svg";
 import Link from "next/link";
+import { auth } from "@/auth";
 
-const Nabvar = ({ authMenu }) => {
+const Nabvar = async ({ authMenu }) => {
+  const user = await auth();
   return (
     <nav>
       <Link href="/">
@@ -26,12 +28,30 @@ const Nabvar = ({ authMenu }) => {
           <li>
             <a href="./bookings.html">Bookings</a>
           </li>
-
-          <li>
-            <Link href="/signin" className="login">
-              Login
-            </Link>
-          </li>
+          {!user ? (
+            <li>
+              <Link href="/signin" className="login">
+                Login
+              </Link>
+            </li>
+          ) : (
+            <li className="flex items-center gap-3">
+              <p className="login">{user?.user?.name}</p>
+              {user?.user?.image ? (
+                <Image
+                  className="rounded-full"
+                  src={user?.user?.image}
+                  width={50}
+                  height={40}
+                  alt=""
+                />
+              ) : (
+                <div className="h-12 w-12 bg-red-400 rounded-full flex items-center justify-center text-white font-semibold text-xl">
+                  {user?.user?.name[0]}
+                </div>
+              )}
+            </li>
+          )}
         </ul>
       )}
     </nav>

@@ -1,7 +1,10 @@
+import { auth } from "@/auth";
 import { getHotels } from "@/queries";
 
 /* eslint-disable react/no-unescaped-entities */
 export default async function Home() {
+  // const authData = await auth();
+  // console.log(authData);
   return (
     <section className="bg-[#F6F3E9] h-screen max-h-screen relative grid place-items-center bg-[url('/hero-bg.jpg')] bg-cover bg-no-repeat bg-center">
       <div className="container items-center pb-12 ">
