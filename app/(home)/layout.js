@@ -13,7 +13,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Nabvar />
+        <Nabvar authMenu={true} />
         <main>{children}</main>
       </body>
     </html>
