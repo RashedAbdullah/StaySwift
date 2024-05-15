@@ -2,6 +2,7 @@ import Image from "next/image";
 import logoImage from "@/public/stayswift.svg";
 import Link from "next/link";
 import { auth } from "@/auth";
+import SignoutComponent from "./auth/signout";
 
 const Nabvar = async ({ authMenu }) => {
   const user = await auth();
@@ -26,7 +27,7 @@ const Nabvar = async ({ authMenu }) => {
           </li>
 
           <li>
-            <a href="./bookings.html">Bookings</a>
+            <Link href="/bookings">Bookings</Link>
           </li>
           {!user ? (
             <li>
@@ -36,7 +37,7 @@ const Nabvar = async ({ authMenu }) => {
             </li>
           ) : (
             <li className="flex items-center gap-3">
-              <p className="login">{user?.user?.name}</p>
+              <p className="text-primary">{user?.user?.name}</p>
               {user?.user?.image ? (
                 <Image
                   className="rounded-full"
@@ -50,6 +51,7 @@ const Nabvar = async ({ authMenu }) => {
                   {user?.user?.name[0]}
                 </div>
               )}
+              <SignoutComponent />
             </li>
           )}
         </ul>
