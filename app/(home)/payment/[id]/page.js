@@ -1,6 +1,13 @@
+import { auth } from "@/auth";
 import PaymentForm from "@/components/payment/payment-form";
+import { redirect } from "next/navigation";
 
-const PaymentPage = () => {
+const PaymentPage = async () => {
+  const session = await auth();
+
+  if (!session) {
+    redirect("/signin");
+  }
   return (
     <main>
       <section className="container">

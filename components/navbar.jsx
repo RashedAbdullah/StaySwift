@@ -26,9 +26,11 @@ const Nabvar = async ({ authMenu }) => {
             <a href="#">Contact us</a>
           </li>
 
-          <li>
-            <Link href="/bookings">Bookings</Link>
-          </li>
+          {user && (
+            <li>
+              <Link href="/bookings">Bookings</Link>
+            </li>
+          )}
           {!user ? (
             <li>
               <Link href="/signin" className="login">
