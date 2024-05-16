@@ -1,12 +1,17 @@
 import Image from "next/image";
 import HotelSummaryInfo from "./hotel-summary";
-import one from "@/public/images/1.png";
 
-const HotelCard = () => {
+const HotelCard = ({ hotelInfo }) => {
   return (
     <div className="flex gap-6 border border-gray/20 p-4 rounded-md">
-      <Image src={one} className="max-h-[162px] max-w-[240px]" alt="" />
-      <HotelSummaryInfo fromListPage={true} />
+      <Image
+        src={hotelInfo.thumbNailUrl}
+        className="max-h-[162px] max-w-[240px]"
+        alt=""
+        width={240}
+        height={162}
+      />
+      <HotelSummaryInfo fromListPage={true} hotelInfo={hotelInfo} />
     </div>
   );
 };

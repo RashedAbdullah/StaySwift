@@ -7,7 +7,7 @@ const PaymentPage = async () => {
 
   if (!session) {
     redirect("/signin");
-  }
+}
   return (
     <main>
       <section className="container">
