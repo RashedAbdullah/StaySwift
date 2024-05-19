@@ -15,6 +15,11 @@ const HotelSummaryInfo = ({ fromListPage, hotelInfo }) => {
           <span className="font-medium">Very Good</span>
           <span>232 Reviews</span>
         </div>
+        <div>
+          <span className="bg-yellow-300 py-1 px-2">
+            {hotelInfo.propertyCategory} Star Property
+          </span>
+        </div>
       </div>
 
       <div className="flex flex-col gap-2 items-end justify-center">
