@@ -2,7 +2,10 @@ import { dbConnection } from "@/db-connection/mongo";
 import { hotelModel } from "@/models/hotel-model";
 import { ratingModel } from "@/models/rating-model";
 import { reviewModel } from "@/models/review-model";
-import { replaceMongoIdInArray } from "@/utils/data-utils";
+import {
+  replaceMongoIdInArray,
+  replaceMongoIdInObject,
+} from "@/utils/data-utils";
 
 const getHotels = async () => {
   try {
@@ -43,4 +46,15 @@ const getReviews = async (hotelId) => {
   }
 };
 
-export { getHotels, getRatings, getReviews };
+const getHotelById = async (hotelId) => {
+  try {
+    await dbConnection();
+
+    const hotel = await hotelModel.findById(hotelId);
+    return replaceMongoIdInObject(hotel);
+  } catch (err) {
+    console.log(err.message);
+  }
+};
+
+export { getHotels, getRatings, getReviews, getHotelById };
