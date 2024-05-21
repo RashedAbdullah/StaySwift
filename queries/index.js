@@ -3,6 +3,7 @@ import { bookingModel } from "@/models/booking-model";
 import { hotelModel } from "@/models/hotel-model";
 import { ratingModel } from "@/models/rating-model";
 import { reviewModel } from "@/models/review-model";
+import { userModel } from "@/models/user-model";
 import {
   isDateIsBetween,
   replaceMongoIdInArray,
@@ -85,15 +86,35 @@ const getReviews = async (hotelId) => {
   }
 };
 
-const getHotelById = async (hotelId) => {
+const getHotelById = async (hotelId, checkin, checkout) => {
   try {
     await dbConnection();
 
     const hotel = await hotelModel.findById(hotelId);
+
+    if (checkin && checkout) {
+      const found = await findBooking(hotel._id, checkin, checkout);
+      if (found) {
+        hotel["isBooked"] = true;
+      } else {
+        hotel["isBooked"] = false;
+      }
+    }
     return replaceMongoIdInObject(hotel);
   } catch (err) {
     console.log(err.message);
   }
 };
 
-export { getHotels, getRatings, getReviews, getHotelById };
+const getUserByEmail = async (email) => {
+  try {
+    await dbConnection();
+
+    const user = await userModel.find({ email: email });
+    return user
+  } catch (err) {
+    console.log(err.message);
+  }
+};
+
+export { getHotels, getRatings, getReviews, getHotelById, getUserByEmail };

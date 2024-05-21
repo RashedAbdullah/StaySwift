@@ -3,8 +3,11 @@ import Overview from "@/components/hotel/overview";
 import Summary from "@/components/hotel/summary";
 import { getHotelById } from "@/queries";
 
-const DynamicHotelPage = async ({ params: { id } }) => {
-  const hotel = await getHotelById(id);
+const DynamicHotelPage = async ({
+  params: { id },
+  searchParams: { checkin, checkout },
+}) => {
+  const hotel = await getHotelById(id, checkin, checkout);
 
   return (
     <>

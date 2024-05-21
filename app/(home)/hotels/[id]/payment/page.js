@@ -1,13 +1,21 @@
 import { auth } from "@/auth";
 import PaymentForm from "@/components/payment/payment-form";
+import { getHotelById, getUserByEmail } from "@/queries";
 import { redirect } from "next/navigation";
 
-const PaymentPage = async () => {
+const PaymentPage = async ({
+  params: { id },
+  searchParams: { checkin, checkout },
+}) => {
   const session = await auth();
 
   if (!session) {
     redirect("/signin");
-}
+  }
+
+  const user = await getUserByEmail(session?.user?.email);
+  const hotel = await getHotelById(id, checkin, checkout);
+  const hashCheckedInAndOut = checkin && checkout;
   return (
     <main>
       <section className="container">
@@ -17,7 +25,7 @@ const PaymentPage = async () => {
             You have picked <b>Effotel By Sayaji Jaipur</b> and base price is{" "}
             <b>$10</b>
           </p>
-          <PaymentForm />
+          <PaymentForm checkin={checkin} checkout={checkout} />
         </div>
       </section>
     </main>
