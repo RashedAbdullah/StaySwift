@@ -3,7 +3,7 @@ import Filter from "@/components/search/Filter";
 import Search from "@/components/search/Search";
 
 const HotelPage = ({ searchParams: { destination, checkin, checkout } }) => {
-  console.log(destination);
+
   return (
     <>
       <section className="bg-[url('/hero-bg.jpg')] bg-cover bg-no-repeat bg-center pt-[100px] pb-[60px]">

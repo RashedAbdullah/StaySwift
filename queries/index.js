@@ -9,6 +9,24 @@ import {
   replaceMongoIdInObject,
 } from "@/utils/data-utils";
 
+const findBooking = async (hotelId, checkin, checkout) => {
+  try {
+    await dbConnection();
+
+    const matches = await bookingModel.find({ hotelId: hotelId.toString() });
+    const found = matches.find((match) => {
+      return (
+        isDateIsBetween(checkin, match.checkin, match.checkout) ||
+        isDateIsBetween(checkin, match.checkin, match.checkout)
+      );
+    });
+
+    return found;
+  } catch (err) {
+    console.log(err.message);
+  }
+};
+
 const getHotels = async (destination, checkin, checkout) => {
   try {
     await dbConnection();
@@ -29,7 +47,7 @@ const getHotels = async (destination, checkin, checkout) => {
 
     if (checkin && checkout) {
       allHotels = await Promise.all(
-        allHotels.map(async (hotel) => {
+        allHotels?.map(async (hotel) => {
           const found = await findBooking(hotel._id, checkin, checkout);
 
           if (found) {
@@ -42,24 +60,6 @@ const getHotels = async (destination, checkin, checkout) => {
     }
 
     return replaceMongoIdInArray(allHotels);
-  } catch (err) {
-    console.log(err.message);
-  }
-};
-
-const findBooking = async (hotelId, checkin, checkout) => {
-  try {
-    await dbConnection();
-
-    const matches = await bookingModel.find({ hotelId: hotelId.toString() });
-    const found = matches.find((match) => {
-      return (
-        isDateIsBetween(checkin, match.checkin, match.checkout) ||
-        isDateIsBetween(checkin, match.checkin, match.checkout)
-      );
-    });
-
-    return found;
   } catch (err) {
     console.log(err.message);
   }
